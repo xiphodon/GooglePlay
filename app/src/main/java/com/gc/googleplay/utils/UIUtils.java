@@ -1,6 +1,7 @@
 package com.gc.googleplay.utils;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
@@ -69,6 +70,15 @@ public class UIUtils {
      */
     public static int getColor(int id){
         return getContext().getResources().getColor(id);
+    }
+
+    /**
+     * 根据id获取颜色的状态选择器
+     * @param id
+     * @return
+     */
+    public static ColorStateList getColorStateList(int id) {
+        return getContext().getResources().getColorStateList(id);
     }
 
     /**
@@ -156,4 +166,5 @@ public class UIUtils {
             getHandler().post(runnable);
         }
     }
+
 }

@@ -1,9 +1,13 @@
-package com.gc.googleplay;
+package com.gc.googleplay.ui.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+import com.gc.googleplay.R;
+
+/**
+ * 首页
+ */
+public class MainActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
