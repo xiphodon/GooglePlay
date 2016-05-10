@@ -51,17 +51,17 @@ public class LoadingPage extends FrameLayout {
             addView(mLoadingPage);// 将加载中的布局添加给当前的帧布局
         }
 
-//        // 初始化加载失败布局
-//        if (mErrorPage == null) {
-//            mErrorPage = UIUtils.inflate(R.layout.page_error);
-//            addView(mErrorPage);
-//        }
-//
-//        // 初始化数据为空布局
-//        if (mEmptyPage == null) {
-//            mEmptyPage = UIUtils.inflate(R.layout.page_empty);
-//            addView(mEmptyPage);
-//        }
+        // 初始化加载失败布局
+        if (mErrorPage == null) {
+            mErrorPage = UIUtils.inflate(R.layout.page_error);
+            addView(mErrorPage);
+        }
+
+        // 初始化数据为空布局
+        if (mEmptyPage == null) {
+            mEmptyPage = UIUtils.inflate(R.layout.page_empty);
+            addView(mEmptyPage);
+        }
 
 //        showRightPage();
     }
