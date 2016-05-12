@@ -29,26 +29,34 @@ public abstract class BaseFragment extends Fragment {
                 return BaseFragment.this.onCreateSuccessView();
             }
 
-////            @Override
-////            public ResultState onLoad() {
-////                return BaseFragment.this.onLoad();
-////            }
-//
+            @Override
+            public ResultState onLoad() {
+                return BaseFragment.this.onLoad();
+            }
+
         };
 
         return mLoadingPage;
     }
 
-    // 加载成功的布局, 必须由子类来实现
+    /**
+     * 加载成功的布局, 必须由子类来实现
+     * @return
+     */
     public abstract View onCreateSuccessView();
 
-//    // 加载网络数据, 必须由子类来实现
-//    public abstract LoadingPage.ResultState onLoad();
+    /**
+     * 加载网络数据, 必须由子类来实现
+     * @return
+     */
+    public abstract LoadingPage.ResultState onLoad();
 
-//    // 开始加载数据
-//    public void loadData() {
-//        if (mLoadingPage != null) {
-//            mLoadingPage.loadData();
-//        }
-//    }
+    /**
+     * 开始加载数据
+     */
+    public void loadData() {
+        if (mLoadingPage != null) {
+            mLoadingPage.loadData();
+        }
+    }
 }

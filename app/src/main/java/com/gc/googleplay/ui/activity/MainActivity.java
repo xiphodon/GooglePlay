@@ -41,6 +41,26 @@ public class MainActivity extends BaseActivity {
 
         //将PagerTab和ViewPager绑定在一起
         pt_pagerTab.setViewPager(vp_viewPager);
+
+        //滑动界面切换监听
+        pt_pagerTab.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                BaseFragment baseFragment = FragmentFactory.createFragment(position);
+                // 让选择的界面开始加载数据
+                baseFragment.loadData();
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     /**
