@@ -14,7 +14,7 @@ import com.gc.googleplay.utils.UIUtils;
  * - 未加载 - 加载中 - 加载失败 - 数据为空 - 加载成功
  *
  */
-public class LoadingPage extends FrameLayout {
+public abstract class LoadingPage extends FrameLayout {
 
     private static final int STATE_LOAD_UNDO = 1;// 未加载
     private static final int STATE_LOAD_LOADING = 2;// 正在加载
@@ -63,43 +63,45 @@ public class LoadingPage extends FrameLayout {
             addView(mEmptyPage);
         }
 
-//        showRightPage();
+        showRightPage();
     }
 
-//    // 根据当前状态,决定显示哪个布局
-//    private void showRightPage() {
-//        // if (mCurrentState == STATE_LOAD_UNDO || mCurrentState == STATE_LOAD_LOADING) {
-//        // mLoadingPage.setVisibility(View.VISIBLE);
-//        // } else {
-//        // mLoadingPage.setVisibility(View.GONE);
-//        // }
-//        mLoadingPage
-//                .setVisibility((mCurrentState == STATE_LOAD_UNDO || mCurrentState == STATE_LOAD_LOADING) ? View.VISIBLE
-//                        : View.GONE);
-//
-//        mErrorPage
-//                .setVisibility(mCurrentState == STATE_LOAD_ERROR ? View.VISIBLE
-//                        : View.GONE);
-//
-//        mEmptyPage
-//                .setVisibility(mCurrentState == STATE_LOAD_EMPTY ? View.VISIBLE
-//                        : View.GONE);
-//
-//        // 当成功布局为空,并且当前状态为成功,才初始化成功的布局
-//        if (mSuccessPage == null && mCurrentState == STATE_LOAD_SUCCESS) {
-//            mSuccessPage = onCreateSuccessView();
-//            if (mSuccessPage != null) {
-//                addView(mSuccessPage);
-//            }
-//        }
-//
-//        if (mSuccessPage != null) {
-//            mSuccessPage
-//                    .setVisibility(mCurrentState == STATE_LOAD_SUCCESS ? View.VISIBLE
-//                            : View.GONE);
-//        }
-//    }
-//
+    /**
+     * 根据当前状态,决定显示哪个布局
+     */
+    private void showRightPage() {
+        // if (mCurrentState == STATE_LOAD_UNDO || mCurrentState == STATE_LOAD_LOADING) {
+        // mLoadingPage.setVisibility(View.VISIBLE);
+        // } else {
+        // mLoadingPage.setVisibility(View.GONE);
+        // }
+        mLoadingPage
+                .setVisibility((mCurrentState == STATE_LOAD_UNDO || mCurrentState == STATE_LOAD_LOADING) ? View.VISIBLE
+                        : View.GONE);
+
+        mErrorPage
+                .setVisibility(mCurrentState == STATE_LOAD_ERROR ? View.VISIBLE
+                        : View.GONE);
+
+        mEmptyPage
+                .setVisibility(mCurrentState == STATE_LOAD_EMPTY ? View.VISIBLE
+                        : View.GONE);
+
+        // 当成功布局为空,并且当前状态为成功,才初始化成功的布局
+        if (mSuccessPage == null && mCurrentState == STATE_LOAD_SUCCESS) {
+            mSuccessPage = onCreateSuccessView();
+            if (mSuccessPage != null) {
+                addView(mSuccessPage);
+            }
+        }
+
+        if (mSuccessPage != null) {
+            mSuccessPage
+                    .setVisibility(mCurrentState == STATE_LOAD_SUCCESS ? View.VISIBLE
+                            : View.GONE);
+        }
+    }
+
 //    // 开始加载数据
 //    public void loadData() {
 //        if (mCurrentState != STATE_LOAD_LOADING) {// 如果当前没有加载, 就开始加载数据
@@ -128,9 +130,9 @@ public class LoadingPage extends FrameLayout {
 //        }
 //    }
 
-//    // 加载成功后显示的布局, 必须由调用者来实现
-//    public abstract View onCreateSuccessView();
-//
+    // 加载成功后显示的布局, 必须由调用者来实现
+    public abstract View onCreateSuccessView();
+
 //    // 加载网络数据, 返回值表示请求网络结束后的状态
 //    public abstract ResultState onLoad();
 
