@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import com.gc.googleplay.ui.view.LoadingPage;
 import com.gc.googleplay.utils.UIUtils;
 
+import java.util.ArrayList;
+
 /**
  * fragment基类
  */
@@ -58,5 +60,26 @@ public abstract class BaseFragment extends Fragment {
         if (mLoadingPage != null) {
             mLoadingPage.loadData();
         }
+    }
+
+    /**
+     * 对网络返回数据的合法性进行校验
+     * @param obj
+     * @return
+     */
+    public LoadingPage.ResultState check(Object obj) {
+        if (obj != null) {
+            if (obj instanceof ArrayList) {// 判断是否是集合
+                ArrayList list = (ArrayList) obj;
+
+                if (list.isEmpty()) {
+                    return LoadingPage.ResultState.STATE_EMPTY;
+                } else {
+                    return LoadingPage.ResultState.STATE_SUCCESS;
+                }
+            }
+        }
+
+        return LoadingPage.ResultState.STATE_ERROR;
     }
 }
