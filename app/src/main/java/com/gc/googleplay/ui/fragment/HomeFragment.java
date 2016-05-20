@@ -1,15 +1,19 @@
 package com.gc.googleplay.ui.fragment;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.gc.googleplay.R;
 import com.gc.googleplay.domain.AppInfo;
 import com.gc.googleplay.http.protocol.HomeProtocol;
 import com.gc.googleplay.ui.adapter.MyBaseAdapter;
 import com.gc.googleplay.ui.holder.BaseHolder;
 import com.gc.googleplay.ui.holder.HomeHolder;
 import com.gc.googleplay.ui.view.LoadingPage;
+import com.gc.googleplay.ui.view.MyListView;
 import com.gc.googleplay.utils.UIUtils;
 
 import java.util.ArrayList;
@@ -27,7 +31,8 @@ public class HomeFragment extends BaseFragment {
     public View onCreateSuccessView() {
         // TextView view = new TextView(UIUtils.getContext());
         // view.setText(getClass().getSimpleName());
-        ListView view = new ListView(UIUtils.getContext());
+        MyListView view = new MyListView(UIUtils.getContext());
+
         view.setAdapter(new HomeAdapter(data));
         return view;
     }
