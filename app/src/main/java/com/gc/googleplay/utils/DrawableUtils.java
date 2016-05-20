@@ -4,6 +4,9 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
 
+/**
+ * Drawable工具类
+ */
 public class DrawableUtils {
 
 	//获取一个shape对象
