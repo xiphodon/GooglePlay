@@ -33,9 +33,10 @@ public class RecommendFragment extends BaseFragment {
         int padding = UIUtils.dip2px(10);
         stellar.setInnerPadding(padding, padding, padding, padding);
 
-        // 设置默认页面, 第一组数据
+        // 设置默认页面, 第一组数据，播放动画（true）
         stellar.setGroup(0, true);
 
+        //手机摇晃监听
         ShakeListener shake = new ShakeListener(UIUtils.getContext());
         shake.setOnShakeListener(new ShakeListener.OnShakeListener() {
 
@@ -56,6 +57,8 @@ public class RecommendFragment extends BaseFragment {
     }
 
     class RecommendAdapter implements StellarMap.Adapter {
+
+        private Toast toast;
 
         // 返回组的个数
         @Override
@@ -78,8 +81,8 @@ public class RecommendFragment extends BaseFragment {
         // 初始化布局
         @Override
         public View getView(int group, int position, View convertView) {
-            // 因为position每组都会从0开始计数, 所以需要将前面几组数据的个数加起来,才能确定当前组获取数据的角标位置
-            position += (group) * getCount(group - 1);
+            // position每组都会从0开始计数, 所以需要将前面几组数据的个数加起来,才能确定当前组获取数据的角标位置起始点
+            position += group * getCount(group - 1);
 
             // System.out.println("pos:" + position);
 
@@ -91,7 +94,7 @@ public class RecommendFragment extends BaseFragment {
             Random random = new Random();
             // 随机大小, 16-25
             int size = 16 + random.nextInt(10);
-            view.setTextSize(TypedValue.COMPLEX_UNIT_SP, size);
+            view.setTextSize(TypedValue.COMPLEX_UNIT_SP, size);//单位为sp，大小为size（16~25）
 
             // 随机颜色
             // r g b, 0-255 -> 30-230, 颜色值不能太小或太大, 从而避免整体颜色过亮或者过暗
@@ -105,7 +108,14 @@ public class RecommendFragment extends BaseFragment {
 
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(UIUtils.getContext(), keyword, Toast.LENGTH_SHORT).show();
+
+                    if (toast == null){
+                        toast = Toast.makeText(UIUtils.getContext(), "", Toast.LENGTH_SHORT);
+                    }
+
+                    toast.setText(keyword);
+                    toast.show();
+
                 }
             });
 
@@ -117,7 +127,7 @@ public class RecommendFragment extends BaseFragment {
         public int getNextGroupOnZoom(int group, boolean isZoomIn) {
             System.out.println("isZoomIn:" + isZoomIn);
             if (isZoomIn) {
-                // 往下滑加载上一页
+                // isZoomIn = true 往下滑加载上一页
                 if (group > 0) {
                     group--;
                 } else {
@@ -125,7 +135,7 @@ public class RecommendFragment extends BaseFragment {
                     group = getGroupCount() - 1;
                 }
             } else {
-                // 往上滑加载下一页
+                // isZoomIn = false 往上滑加载下一页
                 if (group < getGroupCount() - 1) {
                     group++;
                 } else {
