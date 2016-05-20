@@ -1,8 +1,10 @@
 package com.gc.googleplay.ui.fragment;
 
 import android.view.View;
+import android.widget.TextView;
 
 import com.gc.googleplay.ui.view.LoadingPage;
+import com.gc.googleplay.utils.UIUtils;
 
 /**
  * 游戏
@@ -10,11 +12,13 @@ import com.gc.googleplay.ui.view.LoadingPage;
 public class GameFragment extends BaseFragment {
     @Override
     public View onCreateSuccessView() {
-        return null;
+        TextView view = new TextView(UIUtils.getContext());
+        view.setText("GameFragment");
+        return view;
     }
 
     @Override
     public LoadingPage.ResultState onLoad() {
-        return LoadingPage.ResultState.STATE_EMPTY;
+        return LoadingPage.ResultState.STATE_SUCCESS;
     }
 }
