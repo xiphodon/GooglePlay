@@ -100,6 +100,7 @@ public class HomeHeaderHolder extends BaseHolder<ArrayList<String>> {
 			llContainer.addView(point);
 		}
 
+		// ViewPager 页面改变监听事件
 		mViewPager.addOnPageChangeListener(new OnPageChangeListener() {
 
 			@Override

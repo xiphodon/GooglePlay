@@ -1,14 +1,17 @@
 package com.gc.googleplay.ui.fragment;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.gc.googleplay.R;
 import com.gc.googleplay.domain.AppInfo;
 import com.gc.googleplay.http.protocol.HomeProtocol;
+import com.gc.googleplay.ui.activity.HomeDetailActivity;
 import com.gc.googleplay.ui.adapter.MyBaseAdapter;
 import com.gc.googleplay.ui.holder.BaseHolder;
 import com.gc.googleplay.ui.holder.HomeHeaderHolder;
@@ -46,6 +49,22 @@ public class HomeFragment extends BaseFragment {
             // 设置轮播条数据
             header.setData(mPictureList);
         }
+
+        //点击条目跳转到详情页
+        view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                AppInfo appInfo = data.get(position - 1);
+
+                if(appInfo != null){
+                    Intent intent = new Intent(UIUtils.getContext(), HomeDetailActivity.class);
+                    intent.putExtra("packageName",appInfo.packageName);
+                    startActivity(intent);
+                }
+
+            }
+        });
 
         return view;
     }
