@@ -3,11 +3,13 @@ package com.gc.googleplay.ui.activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.HorizontalScrollView;
 
 import com.gc.googleplay.R;
 import com.gc.googleplay.domain.AppInfo;
 import com.gc.googleplay.http.protocol.HomeDetailProtocol;
 import com.gc.googleplay.ui.holder.DetailAppInfoHolder;
+import com.gc.googleplay.ui.holder.DetailPicsHolder;
 import com.gc.googleplay.ui.holder.DetailSafeHolder;
 import com.gc.googleplay.ui.view.LoadingPage;
 import com.gc.googleplay.utils.UIUtils;
@@ -65,6 +67,12 @@ public class HomeDetailActivity extends BaseActivity {
 		DetailSafeHolder safeHolder = new DetailSafeHolder();
 		flDetailSafe.addView(safeHolder.getRootView());
 		safeHolder.setData(data);
+
+		// 初始化截图模块
+		HorizontalScrollView hsvPic = (HorizontalScrollView) view.findViewById(R.id.hsv_detail_pics);
+		DetailPicsHolder picsHolder = new DetailPicsHolder();
+		hsvPic.addView(picsHolder.getRootView());
+		picsHolder.setData(data);
 
 		return view;
 	}
