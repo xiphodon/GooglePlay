@@ -11,6 +11,7 @@ import com.gc.googleplay.domain.AppInfo;
 import com.gc.googleplay.http.protocol.HomeProtocol;
 import com.gc.googleplay.ui.adapter.MyBaseAdapter;
 import com.gc.googleplay.ui.holder.BaseHolder;
+import com.gc.googleplay.ui.holder.HomeHeaderHolder;
 import com.gc.googleplay.ui.holder.HomeHolder;
 import com.gc.googleplay.ui.view.LoadingPage;
 import com.gc.googleplay.ui.view.MyListView;
@@ -25,6 +26,8 @@ public class HomeFragment extends BaseFragment {
 
     // private ArrayList<String> data;
     private ArrayList<AppInfo> data;
+    // 轮播条数据
+    private ArrayList<String> mPictureList;
 
     // 如果加载数据成功, 就回调此方法, 在主线程运行
     @Override
@@ -33,7 +36,17 @@ public class HomeFragment extends BaseFragment {
         // view.setText(getClass().getSimpleName());
         MyListView view = new MyListView(UIUtils.getContext());
 
+        // 给listview增加头布局展示轮播条
+        HomeHeaderHolder header = new HomeHeaderHolder();
+        view.addHeaderView(header.getRootView());// 先添加头布局,再setAdapter
+
         view.setAdapter(new HomeAdapter(data));
+
+        if (mPictureList != null) {
+            // 设置轮播条数据
+            header.setData(mPictureList);
+        }
+
         return view;
     }
 
@@ -47,6 +60,8 @@ public class HomeFragment extends BaseFragment {
         // }
         HomeProtocol protocol = new HomeProtocol();
         data = protocol.getData(0);// 加载第一页数据
+
+        mPictureList = protocol.getPictureList();
 
         return check(data);// 校验数据并返回
     }
