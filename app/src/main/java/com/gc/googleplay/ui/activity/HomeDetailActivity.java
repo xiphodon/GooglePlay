@@ -9,6 +9,7 @@ import com.gc.googleplay.R;
 import com.gc.googleplay.domain.AppInfo;
 import com.gc.googleplay.http.protocol.HomeDetailProtocol;
 import com.gc.googleplay.ui.holder.DetailAppInfoHolder;
+import com.gc.googleplay.ui.holder.DetailDesHolder;
 import com.gc.googleplay.ui.holder.DetailPicsHolder;
 import com.gc.googleplay.ui.holder.DetailSafeHolder;
 import com.gc.googleplay.ui.view.LoadingPage;
@@ -73,6 +74,12 @@ public class HomeDetailActivity extends BaseActivity {
 		DetailPicsHolder picsHolder = new DetailPicsHolder();
 		hsvPic.addView(picsHolder.getRootView());
 		picsHolder.setData(data);
+
+		// 初始化描述模块
+		FrameLayout flDetailDes = (FrameLayout) view.findViewById(R.id.fl_detail_des);
+		DetailDesHolder desHolder = new DetailDesHolder();
+		flDetailDes.addView(desHolder.getRootView());
+		desHolder.setData(data);
 
 		return view;
 	}
