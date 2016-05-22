@@ -1,6 +1,10 @@
 package com.gc.googleplay.ui.activity;
 
 import android.os.Bundle;
+import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
@@ -29,6 +33,12 @@ public class HomeDetailActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+//		//在ActionBar上显示logo
+//		ActionBar actionBar = getSupportActionBar();
+//		actionBar.setLogo(R.drawable.ic_launcher_x_small);
+//		actionBar.setDisplayUseLogoEnabled(true);
+//		actionBar.setDisplayShowHomeEnabled(true);
+
 		mLoadingPage = new LoadingPage(this) {
 
 			@Override
@@ -50,6 +60,43 @@ public class HomeDetailActivity extends BaseActivity {
 
 		// 开始加载网络数据
 		mLoadingPage.loadData();
+
+		initActionbar();
+	}
+
+	/**
+	 * 初始化actionbar
+	 */
+	private void initActionbar() {
+		ActionBar actionbar = getSupportActionBar();
+
+		//在ActionBar上显示logo
+		actionbar.setLogo(R.drawable.ic_launcher_x_small);
+		actionbar.setDisplayUseLogoEnabled(true);
+		actionbar.setDisplayShowHomeEnabled(true);
+
+//		actionbar.setHomeButtonEnabled(true);// home处可以点击
+		actionbar.setDisplayHomeAsUpEnabled(true);// 显示左上角返回键
+
+	}
+
+	/**
+	 * ToolBar中的点击事件
+	 * @param item
+	 * @return
+	 */
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case android.R.id.home:
+				finish();
+				break;
+
+			default:
+				break;
+		}
+
+		return super.onOptionsItemSelected(item);
 	}
 
 	public View onCreateSuccessView() {
