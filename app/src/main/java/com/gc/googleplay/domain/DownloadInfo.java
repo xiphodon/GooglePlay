@@ -28,10 +28,10 @@ public class DownloadInfo {
 	public int currentState;// 当前下载状态
 	public String path;// 下载到本地文件的路径
 
-	public static final String GOOGLE_MARKET = "GOOGLE_MARKET";// sdcard根目录文件夹名称
+	public static final String GOOGLE_MARKET = "ANDROID_MARKET";// sdcard根目录文件夹名称
 	public static final String DONWLOAD = "download";// 子文件夹名称, 存放下载的文件
 
-	// 获取下载进度(0-1)
+	// 获取下载进度(0~1)
 	public float getProgress() {
 		if (size == 0) {
 			return 0;
@@ -61,8 +61,7 @@ public class DownloadInfo {
 	// 获取文件下载路径
 	public String getFilePath() {
 		StringBuffer sb = new StringBuffer();
-		String sdcard = Environment.getExternalStorageDirectory()
-				.getAbsolutePath();
+		String sdcard = Environment.getExternalStorageDirectory().getAbsolutePath();
 		sb.append(sdcard);
 		// sb.append("/");
 		sb.append(File.separator);

@@ -32,6 +32,7 @@ public class DownloadManager {
 	public static final int STATE_ERROR = 5;
 	public static final int STATE_SUCCESS = 6;
 
+	//单例模式（饿汉）
 	private static DownloadManager mDM = new DownloadManager();
 
 	// 4. 观察者集合
@@ -149,7 +150,7 @@ public class DownloadManager {
 				InputStream in = httpResult.getInputStream();
 				FileOutputStream out = null;
 				try {
-					out = new FileOutputStream(file, true);// 要在原有文件基础上追加数据
+					out = new FileOutputStream(file, true);//true: 要在原有文件基础上追加数据
 
 					int len = 0;
 					byte[] buffer = new byte[1024];

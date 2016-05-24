@@ -5,6 +5,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Toast;
 
+import com.gc.googleplay.manager.ThreadManager;
 import com.gc.googleplay.ui.holder.BaseHolder;
 import com.gc.googleplay.ui.holder.MoreHolder;
 import com.gc.googleplay.utils.UIUtils;
@@ -111,7 +112,45 @@ public abstract class MyBaseAdapter<T> extends BaseAdapter {
         if (!isLoadMore) {
             isLoadMore = true;
 
-            new Thread() {
+//            new Thread() {
+//                @Override
+//                public void run() {
+//                    final ArrayList<T> moreData = onLoadMore();
+//
+//                    //在主线程刷新数据
+//                    UIUtils.runOnUIThread(new Runnable() {
+//
+//                        @Override
+//                        public void run() {
+//                            if (moreData != null) {
+//                                // 每一页有20条数据, 如果返回的数据小于20条, 就认为到了最后一页了
+//                                if (moreData.size() < 20) {
+//                                    holder.setData(MoreHolder.STATE_MORE_NONE);
+//                                    Toast.makeText(UIUtils.getContext(),
+//                                            "没有更多数据了", Toast.LENGTH_SHORT)
+//                                            .show();
+//                                } else {
+//                                    // 还有更多数据
+//                                    holder.setData(MoreHolder.STATE_MORE_MORE);
+//                                }
+//
+//                                // 将更多数据追加到当前集合中
+//                                data.addAll(moreData);
+//                                // 刷新界面
+//                                MyBaseAdapter.this.notifyDataSetChanged();
+//                            } else {
+//                                // 加载更多失败
+//                                holder.setData(MoreHolder.STATE_MORE_ERROR);
+//                            }
+//
+//                            isLoadMore = false;
+//                        }
+//                    });
+//                }
+//            }.start();
+
+            //采用线程池来管理线程
+            ThreadManager.getThreadPool().execute(new Runnable() {
                 @Override
                 public void run() {
                     final ArrayList<T> moreData = onLoadMore();
@@ -146,7 +185,7 @@ public abstract class MyBaseAdapter<T> extends BaseAdapter {
                         }
                     });
                 }
-            }.start();
+            });
         }
 
     }

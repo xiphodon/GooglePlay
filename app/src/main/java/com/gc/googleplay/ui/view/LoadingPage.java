@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 
 import com.gc.googleplay.R;
+import com.gc.googleplay.manager.ThreadManager;
 import com.gc.googleplay.utils.UIUtils;
 
 /**
@@ -121,7 +122,30 @@ public abstract class LoadingPage extends FrameLayout {
 
             mCurrentState = STATE_LOAD_LOADING;
 
-            new Thread() {
+
+
+//            new Thread() {
+//                @Override
+//                public void run() {
+//                    final ResultState resultState = onLoad();
+//
+//                    // 运行在主线程
+//                    UIUtils.runOnUIThread(new Runnable() {
+//
+//                        @Override
+//                        public void run() {
+//                            if (resultState != null) {
+//                                mCurrentState = resultState.getState();// 网络加载结束后,更新网络状态
+//                                // 根据最新的状态来刷新页面
+//                                showRightPage();
+//                            }
+//                        }
+//                    });
+//                }
+//            }.start();
+
+            //采用线程池管理线程
+            ThreadManager.getThreadPool().execute(new Runnable() {
                 @Override
                 public void run() {
                     final ResultState resultState = onLoad();
@@ -139,7 +163,7 @@ public abstract class LoadingPage extends FrameLayout {
                         }
                     });
                 }
-            }.start();
+            });
         }
     }
 
