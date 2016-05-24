@@ -56,20 +56,27 @@
                 android:textSize="15sp" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:gravity="center"
                 android:orientation="vertical" >
 
-                <ImageView
+                <!--<ImageView-->
+                    <!--android:layout_width="30dp"-->
+                    <!--android:layout_height="30dp"-->
+                    <!--android:layout_marginTop="3dp"-->
+                    <!--android:src="@drawable/ic_download" />-->
+
+                <FrameLayout
+                    android:id="@+id/fl_progress"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginTop="3dp"
-                    android:src="@drawable/ic_download" />
+                    android:layout_marginTop="3dp" />
 
                 <TextView
+                    android:id="@+id/tv_download"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="1dp"

@@ -18,7 +18,9 @@ import android.widget.RemoteViews.RemoteView;
 import com.gc.googleplay.utils.StringUtils;
 import com.gc.googleplay.utils.UIUtils;
 
-
+/**
+ * 自定义水平进度条
+ */
 @RemoteView
 public class ProgressHorizontal extends View {
 	private static final int MAX_SMOOTH_ANIM_DURATION = 2000;
